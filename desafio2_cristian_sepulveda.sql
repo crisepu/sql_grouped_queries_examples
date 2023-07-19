@@ -49,17 +49,17 @@ select fecha, sum(cantidad) as inscritos
 from inscritos 
 group by fecha 
 having sum(cantidad) = (select suma 
-						from (select fecha, sum(cantidad) as suma 
-							  from inscritos 
-							  group by fecha) as new_table 
-						limit 1);
+			from (select fecha, sum(cantidad) as suma 
+				from inscritos 
+				group by fecha) as new_table 
+			limit 1);
 
 --7 ¿Qué días se inscribieron la mayor cantidad de personas utilizando el blog? ¿Cuántas personas fueron?
 select fuente, fecha, cantidad 
 from inscritos 
 where (fuente = 'Blog') and (cantidad = (select max(cantidad) 
-										 from inscritos 
-										 where fuente = 'Blog'));
+						from inscritos 
+						where fuente = 'Blog'));
 
 --8 ¿Cuál es el promedio de personas inscritas por día?
 select fecha, avg(cantidad) as "promedio inscritos" 
